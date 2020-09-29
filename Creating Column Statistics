@@ -1,0 +1,46 @@
+# Our finance department wants to know the price of the most expensive pair of shoes purchased. Save your answer to the variable most_expensive.
+
+most_expensive = orders.price.max()
+
+
+# Our fashion department wants to know how many different colors of shoes we are selling. Save your answer to the variable num_colors.
+
+num_colors = orders.shoe_color.nunique()
+
+
+# Now, they want to know the most expensive shoe for each shoe_type (i.e., the most expensive boot, the most expensive ballet flat, etc.). Save your answer to the variable pricey_shoes.
+
+pricey_shoes = orders.groupby('shoe_type').price.max()
+
+
+#  Modify your code from the previous exercise so that it ends with reset_index, which will change pricey_shoes into a DataFrame.
+
+pricey_shoes = orders.groupby('shoe_type').price.max().reset_index()
+
+
+# Make it easier for her to compare purchases of different shoe colors of the same shoe type by creating a pivot table. Save your results to the variable shoe_counts_pivot.
+
+shoe_counts_pivot = shoe_counts.pivot(
+  columns='shoe_color',
+  index='shoe_type',
+  values='id').reset_index()
+  
+
+# Use print and head() to examine the first few rows of the DataFrame.
+
+print(user_visits.head())
+
+
+# Use groupby to calculate the number of visits to our site from each utm_source for each month. Save your answer to the variable click_source_by_month.
+
+click_source_by_month = user_visits.groupby(['utm_source', 'month']).id.count().reset_index()
+
+
+# Use pivot to create a pivot table where the rows are utm_source and the columns are month. Save your results to the variable click_source_by_month_pivot.
+
+click_source_by_month_pivot = click_source_by_month.pivot(  columns='month',
+  index='utm_source',
+  values='id').reset_index()
+  
+ 
+
